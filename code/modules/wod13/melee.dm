@@ -757,7 +757,7 @@
 	material_flags = MATERIAL_NO_EFFECTS
 	is_wood = TRUE
 
-/obj/item/melee/classic_baton/vampire
+/obj/item/melee/vampirearms/baton
 	name = "police baton"
 	desc = "Blunt instrument of justice."
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
@@ -766,18 +766,18 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	attack_verb_continuous = list("bludgeons", "bashes", "beats")
 	attack_verb_simple = list("bludgeon", "bash", "beat")
-	force = 30
+	force = 25
 	wound_bonus = 15
 	block_chance = 10
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_SUITSTORE
 	w_class = WEIGHT_CLASS_NORMAL
 
-/obj/item/melee/classic_baton/vampire/attack(mob/living/target, mob/living/user)
+/obj/item/melee/vampirearms/baton/attack(mob/living/target, mob/living/user)
 	. = ..()
-	if(HAS_TRAIT(user, TRAIT_PACIFISM))
-		return
 	var/atom/throw_targett = get_edge_target_turf(target, user.dir)
-	target.apply_damage(30, STAMINA, BODY_ZONE_CHEST)
+	target.apply_damage(40, STAMINA, BODY_ZONE_CHEST)
+	target.Knockdown(20)
+	target.drop_all_held_items()
 	if(!target.anchored && prob(25))
 		target.throw_at(throw_targett, 1, 1, user)
 
