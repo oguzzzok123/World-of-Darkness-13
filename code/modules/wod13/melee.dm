@@ -771,7 +771,14 @@
 	block_chance = 10
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_SUITSTORE
 	w_class = WEIGHT_CLASS_NORMAL
-	is_wood = TRUE
+
+/obj/item/melee/classic_baton/vampire/attack(mob/living/target, mob/living/user)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_PACIFISM))
+		return
+	var/atom/throw_targett = get_edge_target_turf(target, user.dir)
+	if(!target.anchored && prob(25))
+		target.throw_at(throw_targett, 1, 1, user)
 
 
 /obj/item/melee/vampirearms/knife/switchblade
