@@ -777,8 +777,10 @@
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		return
 	var/atom/throw_targett = get_edge_target_turf(target, user.dir)
+	target.apply_damage(30, STAMINA, BODY_ZONE_CHEST)
 	if(!target.anchored && prob(25))
 		target.throw_at(throw_targett, 1, 1, user)
+
 
 
 /obj/item/melee/vampirearms/knife/switchblade
